@@ -29,3 +29,9 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::view('admin','admin');
+
+Route::get('learn', function () {
+    return view('learn', 'Learning Laravel');
+});
