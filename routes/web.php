@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,8 +32,28 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::view('admin','admin');
+//Route::view('admin','admin');
+//
+//Route::get('learn', function () {
+//    return view('learn', 'Learning Laravel');
+//});
 
-Route::get('learn', function () {
-    return view('learn', 'Learning Laravel');
+Route::view('/login', 'auth.login');
+Route::post('login', [LoginController::class, 'login'])->name('login');
+
+
+Route::view('register', 'auth.register');
+Route::post('register', [RegisterController::class, 'register'])->name('register');
+
+
+
+Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::middleware('auth')->group(function () {
+    Route::view('home', 'home')->name('home');
+
 });
+
+
+
+
